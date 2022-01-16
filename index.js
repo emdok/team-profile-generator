@@ -20,7 +20,6 @@ THEN I exit the application, and the HTML is generated
 
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { dir } = require('console');
 const directory = [];
 
 
