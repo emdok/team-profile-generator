@@ -1,25 +1,7 @@
-/* 
-GIVEN a command-line application that accepts user input
-WHEN I am prompted for my team members and their information
-THEN an HTML file is generated that displays a nicely formatted team roster based on user input
-WHEN I click on an email address in the HTML
-THEN my default email program opens and populates the TO field of the email with the address
-WHEN I click on the GitHub username
-THEN that GitHub profile opens in a new tab
-WHEN I start the application
-THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-WHEN I enter the team manager’s name, employee ID, email address, and office number
-THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-WHEN I select the engineer option
-THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-WHEN I select the intern option
-THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-WHEN I decide to finish building my team
-THEN I exit the application, and the HTML is generated
-*/
-
 const inquirer = require("inquirer");
-const fs = require("fs");
+const Manager = require('./lib/Manager.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
 const directory = [];
 
 const promptOption = [
@@ -35,7 +17,7 @@ const promptOption = [
 const managerInput = [
   {
     type: "input",
-    name: "manager",
+    name: "managerName",
     message: "Team Manager Name?",
   },
   {
@@ -45,7 +27,7 @@ const managerInput = [
   },
   {
     type: "input",
-    name: "mangerEmail",
+    name: "managerEmail",
     message: "Team Manager email?",
   },
   {
@@ -58,7 +40,7 @@ const managerInput = [
 const employeeInput = [
   {
     type: "input",
-    name: "employee",
+    name: "employeeName",
     message: "Employee's Name?",
   },
   {
@@ -78,44 +60,62 @@ const employeeInput = [
   },
 ];
 
+const internInput = [
+  {
+    type: "input",
+    name: "internName",
+    message: "Intern's Name?",
+  },
+  {
+    type: "input",
+    name: "internId",
+    message: "Intern's Id?",
+  },
+  {
+    type: "input",
+    name: "internEmail",
+    message: "Intern's Email?",
+  },
+  {
+    type: "input",
+    name: "internSchool",
+    message: "Intern's School?",
+  },
+];
+
+function managerPrompt() {
+  return inquirer.prompt(managerInput).then((answers) => {
+      const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeId);
+      directory.push(manager);
+  });
+};
+
 function prompt() {
     return inquirer.prompt(promptOption).then((answers) => {
         console.log(answers.option[0]);
 
         if (answers.option[0] === 'Engineer') {
             inquirer.prompt(employeeInput).then((answers) => {
-                const engineer = answers;
-                engineer.type = 'engineer';
+                const engineer = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.employeeGithub);
                 directory.push(engineer);
                 prompt();
             });
         };
 
         if (answers.option[0] === 'Intern') {
-            inquirer.prompt(employeeInput).then((answers) => {
-                const intern = answers;
-                intern.type = 'intern';
+            inquirer.prompt(internInput).then((answers) => {
+                const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool)
                 directory.push(intern);
                 prompt();
             })
         };
 
         if (answers.option[0] === 'Finish') {
-            // TODO: Write a function to end program
-            console.log(directory);
+          console.log(directory);
         };
 
     });
 };
-
-function managerPrompt() {
-    return inquirer.prompt(managerInput).then((answers) => {
-        console.log(answers);
-        const manager = answers;
-        manager.type = 'manager',
-        directory.push(manager);
-    })
-}
 
 managerPrompt().then(prompt);
 
