@@ -18,78 +18,69 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 */
 
-const inquirer = require('inquirer');
-const fs = require('fs');
+const inquirer = require("inquirer");
+const fs = require("fs");
 const directory = [];
 
-
 const promptOption = [
-    {
-        type: 'checkbox',
-        name: 'option',
-        message: 'Would you like to add a Manager, Engineer, Intern, or Finish building team?',
-        choices: ['Manager', 'Engineer', 'Intern', 'Finish'],
-    }
+  {
+    type: "checkbox",
+    name: "option",
+    message:
+      "Would you like to add an Engineer, Intern, or Finish building team?",
+    choices: ["Engineer", "Intern", "Finish"],
+  },
 ];
 
 const managerInput = [
-    {
-        type: 'input',
-        name: 'manager',
-        message: 'Team Manager Name?'
-    },
-    {
-        type: 'input',
-        name: 'managerId',
-        message: 'Team Manager Id?'
-    },
-    {
-        type: 'input',
-        name: 'mangerEmail',
-        message: 'Team Manager email?'
-    },
-    {
-        type: 'input',
-        name: 'officeId',
-        message: 'Office number?'
-    }
-  ];
+  {
+    type: "input",
+    name: "manager",
+    message: "Team Manager Name?",
+  },
+  {
+    type: "input",
+    name: "managerId",
+    message: "Team Manager Id?",
+  },
+  {
+    type: "input",
+    name: "mangerEmail",
+    message: "Team Manager email?",
+  },
+  {
+    type: "input",
+    name: "officeId",
+    message: "Office number?",
+  },
+];
 
 const employeeInput = [
-    {
-        type: 'input',
-        name: 'employee',
-        message: "Employee's Name?"
-    },
-    {
-        type: 'input',
-        name: 'employeeId',
-        message: "Employee's Id?"
-    },
-    {
-        type: 'input',
-        name: 'employeeEmail',
-        message: "Employee's Email?"
-    },
-    {
-        type: 'input',
-        name: 'employeeGithub',
-        message: "Employee's Github Username?"
-    }
+  {
+    type: "input",
+    name: "employee",
+    message: "Employee's Name?",
+  },
+  {
+    type: "input",
+    name: "employeeId",
+    message: "Employee's Id?",
+  },
+  {
+    type: "input",
+    name: "employeeEmail",
+    message: "Employee's Email?",
+  },
+  {
+    type: "input",
+    name: "employeeGithub",
+    message: "Employee's Github Username?",
+  },
 ];
 
 function prompt() {
-    inquirer.prompt(promptOption).then((answers) => {
+    return inquirer.prompt(promptOption).then((answers) => {
         console.log(answers.option[0]);
-
-         if (answers.option[0] === 'Manager') {
-            inquirer.prompt(managerInput).then((answers) => {
-                const manager = answers;
-                manager.type = "manager";
-                directory.push(manager);
-                prompt();
-            })
-        };
 
         if (answers.option[0] === 'Engineer') {
             inquirer.prompt(employeeInput).then((answers) => {
@@ -117,4 +108,14 @@ function prompt() {
     });
 };
 
-prompt();
+function managerPrompt() {
+    return inquirer.prompt(managerInput).then((answers) => {
+        console.log(answers);
+        const manager = answers;
+        manager.type = 'manager',
+        directory.push(manager);
+    })
+}
+
+managerPrompt().then(prompt);
+
