@@ -12,8 +12,16 @@ const promptOption = [
     type: "checkbox",
     name: "option",
     message:
-      "Would you like to add an Engineer, Intern, or Finish building team?",
+      "Would you like to add an Engineer, Intern, or Finish building team? (Required)",
     choices: ["Engineer", "Intern", "Finish"],
+    validate: (optionInput) => {
+      if (optionInput) {
+        return true;
+      } else {
+        console.log("Please select an option");
+        return false;
+      }
+    }
   },
 ];
 
@@ -21,22 +29,33 @@ const managerInput = [
   {
     type: "input",
     name: "managerName",
-    message: "Team Manager Name?",
+    message: "Team Manager Name? (Required)",
+    validate: (nameInput) => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please enter a name");
+        return false;
+      }
+    }
   },
   {
     type: "input",
     name: "managerId",
     message: "Team Manager Id?",
+    default: '000'
   },
   {
     type: "input",
     name: "managerEmail",
     message: "Team Manager email?",
+    default: 'example@example.com'
   },
   {
     type: "input",
     name: "officeId",
     message: "Office number?",
+    default: '123'
   },
 ];
 
@@ -44,22 +63,33 @@ const employeeInput = [
   {
     type: "input",
     name: "employeeName",
-    message: "Employee's Name?",
+    message: "Employee's Name? (Required)",
+    validate: (nameInput) => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please enter a name");
+        return false;
+      }
+    }
   },
   {
     type: "input",
     name: "employeeId",
     message: "Employee's Id?",
+    default: '001'
   },
   {
     type: "input",
     name: "employeeEmail",
     message: "Employee's Email?",
+    default: 'employee@employee.com'
   },
   {
     type: "input",
     name: "employeeGithub",
     message: "Employee's Github Username?",
+    default: 'emdok'
   },
 ];
 
@@ -67,22 +97,33 @@ const internInput = [
   {
     type: "input",
     name: "internName",
-    message: "Intern's Name?",
+    message: "Intern's Name? (Required)",
+    validate: (nameInput) => {
+      if (nameInput) {
+        return true;
+      } else {
+        console.log("Please enter a name");
+        return false;
+      }
+    }
   },
   {
     type: "input",
     name: "internId",
     message: "Intern's Id?",
+    default: '002'
   },
   {
     type: "input",
     name: "internEmail",
     message: "Intern's Email?",
+    default: 'intern@example.edu'
   },
   {
     type: "input",
     name: "internSchool",
     message: "Intern's School?",
+    default: 'University of Oregon'
   },
 ];
 
