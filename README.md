@@ -1,6 +1,6 @@
 # Team Profile Generator
 ## Description
-In this project I used Javascript, Node File System, Inquirer, and Jest to build an application that generates a web page that holds a team's directory. Using Inquirer, a user can input information about their employees and new web page will be generated using this information. 
+In this project I used Javascript, Node File System, Inquirer, and Jest to build an application that generates a web page that holds a team's directory. Using Inquirer, a user can input information about their employees and a new web page will be generated using this information. 
 ## Table of Contents (Optional)
 If your README is long, add a table of contents to make it easy for users to find what they need.
 - [Installation](#installation)
