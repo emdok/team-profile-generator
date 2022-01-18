@@ -3,6 +3,8 @@ const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
 const generatePage = require('./src/page-template.js')
+const { writeFile, copyFile } = require('./utils/generate-site.js')
+
 const directory = [];
 
 const promptOption = [
@@ -115,7 +117,8 @@ function prompt() {
         };
 
         if (answers.option[0] === 'Finish') {
-          console.log(generatePage(directory));
+          writeFile(generatePage(directory));
+          copyFile();
         };
 
     });
