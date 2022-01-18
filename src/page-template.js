@@ -5,7 +5,7 @@ const generateCards = (teamData) => {
     console.log(teamData);
     let data = '';
     let thirdPop = '';
-    
+
     for (let i = 0; i < teamData.length; i++) {
       if (teamData[i].role == 'Manager') {
         thirdPop = teamData[i].officeNumber;
@@ -15,19 +15,22 @@ const generateCards = (teamData) => {
         thirdPop = teamData[i].school;
       }
 
-      data += `<div class="col s12 m3">
-      <div class="card small blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">${teamData[i].name}</span>
-          <span class="card-title">${teamData[i].role}</span>
-          <ul>
-            <li>${teamData[i].id}</li>
-            <li>${teamData[i].email}</li>
-            <li>${thirdPop}</li>
+      data += `<div class="col">
+      <div class="card bg-light">
+        <div class="card-header bg-primary">
+          <h3 class="text-white">${teamData[i].name}</h3>
+          <h4 class="text-white">${teamData[i].role}</h4>
+        </div>
+        <div class="card-body">
+          <ul class="list-group">
+            <li class="list-group-item">${teamData[i].id}</li>
+            <li class="list-group-item">${teamData[i].email}</li>
+            <li class="list-group-item">${thirdPop}</li>
           </ul>
         </div>
       </div>
     </div>`;
+
     };
     return data;
 };
@@ -36,25 +39,32 @@ module.exports = (templateData) => {
   return `<!DOCTYPE html>
   <html lang="en">
     <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <!-- Compiled and minified CSS -->
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+      <link rel="stylesheet" href="style.css" />
       <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous"
       />
-      <title>Team Profile</title>
+  
+      <title>Team Generator</title>
     </head>
     <body>
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo center">My Team</a>
+      <header>
+        <div class="container-fluid">
+          <h1 class="display-3 text-white">My Team</h1>
         </div>
-      </nav>
-      <div class="row">
-        ${generateCards(templateData)}
-      </div>
+      </header>
+      <main>
+        <div class="container">
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            ${generateCards(templateData)}
+          </div>
+        </div>
+      </main>
     </body>
   </html>`
 }
