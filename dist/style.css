@@ -4,4 +4,9 @@ header {
     padding-top: 35px;
     padding-bottom: 35px;
     margin-bottom: 50px;
+    filter: drop-shadow(.1rem .2rem .3rem rgba(0,0,0, .4))
+}
+
+.card {
+    filter: drop-shadow(.2rem .2rem .1rem rgba(0,0,0, .3))
 }
