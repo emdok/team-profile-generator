@@ -1,3 +1,4 @@
+/*** Generate HTML with user input ****/
 const generateCards = (teamData) => {
   if (!teamData) {
     return "";
@@ -7,6 +8,7 @@ const generateCards = (teamData) => {
   let thirdListEl = "";
   let displayRole = "";
 
+  /**** For loop to parse through data and add icons and correct properties to cards ****/
   for (let i = 0; i < teamData.length; i++) {
     if (teamData[i].role == "Manager") {
       thirdListEl = "Office Number: " + teamData[i].officeNumber;
@@ -40,6 +42,7 @@ const generateCards = (teamData) => {
   return data;
 };
 
+/**** Export default HTML ****/
 module.exports = (templateData) => {
   return `<!DOCTYPE html>
   <html lang="en">

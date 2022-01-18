@@ -7,6 +7,8 @@ const { writeFile, copyFile } = require('./utils/generate-site.js')
 
 const directory = [];
 
+/**** Prompt for user to decide if they want to add more employees ***/
+
 const promptOption = [
   {
     type: "checkbox",
@@ -23,6 +25,8 @@ const promptOption = [
     },
   },
 ];
+
+/**** Manager Prompt ****/
 
 const managerInput = [
   {
@@ -58,7 +62,8 @@ const managerInput = [
   },
 ];
 
-const employeeInput = [
+/*** Prompt for Engineers ****/
+const engineerInput = [
   {
     type: "input",
     name: "employeeName",
@@ -92,6 +97,7 @@ const employeeInput = [
   },
 ];
 
+/**** Intern Prompt ****/
 const internInput = [
   {
     type: "input",
@@ -126,6 +132,7 @@ const internInput = [
   },
 ];
 
+/**** Function to handle manager's responses ****/
 function managerPrompt() {
   return inquirer.prompt(managerInput).then((answers) => {
       const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeId);
@@ -134,11 +141,12 @@ function managerPrompt() {
   });
 };
 
+/**** Function to handle Engineer and Intern Responses, or end program */
 function prompt() {
     return inquirer.prompt(promptOption).then((answers) => {
 
         if (answers.option[0] === 'Engineer') {
-            inquirer.prompt(employeeInput).then((answers) => {
+            inquirer.prompt(engineerInput).then((answers) => {
                 const engineer = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.employeeGithub);
                 engineer.role = engineer.getRole();
                 directory.push(engineer);
@@ -163,4 +171,5 @@ function prompt() {
     });
 };
 
+/**** Chained methods to ensure that manager prompt runs first, then prompts ****/
 managerPrompt().then(prompt)
