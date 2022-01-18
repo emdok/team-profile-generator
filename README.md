@@ -21,7 +21,7 @@ If your README is long, add a table of contents to make it easy for users to fin
 ## Usage
 To use this application after installation, run `node index.js`, fill out each prompt based on how many employees you plan to add, once done, view the `dist` folder for your finished webpage.
 
-Screen Recording of application: https://watch.screencastify.com/v/7fhyi7ySCBu5AkwiYOgA
+Screen Recording of application: https://watch.screencastify.com/v/RLdD3Dm4R5mc8ALTaDEs
 
 ## Credits
 Emily Dokken
