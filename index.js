@@ -2,6 +2,7 @@ const inquirer = require("inquirer");
 const Manager = require('./lib/Manager.js');
 const Engineer = require('./lib/Engineer.js');
 const Intern = require('./lib/Intern.js');
+const generatePage = require('./src/page-template.js')
 const directory = [];
 
 const promptOption = [
@@ -86,6 +87,7 @@ const internInput = [
 function managerPrompt() {
   return inquirer.prompt(managerInput).then((answers) => {
       const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeId);
+      manager.role = manager.getRole();
       directory.push(manager);
   });
 };
@@ -97,6 +99,7 @@ function prompt() {
         if (answers.option[0] === 'Engineer') {
             inquirer.prompt(employeeInput).then((answers) => {
                 const engineer = new Engineer(answers.employeeName, answers.employeeId, answers.employeeEmail, answers.employeeGithub);
+                engineer.role = engineer.getRole();
                 directory.push(engineer);
                 prompt();
             });
@@ -105,17 +108,17 @@ function prompt() {
         if (answers.option[0] === 'Intern') {
             inquirer.prompt(internInput).then((answers) => {
                 const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool)
+                intern.role = intern.getRole();
                 directory.push(intern);
                 prompt();
             })
         };
 
         if (answers.option[0] === 'Finish') {
-          console.log(directory);
+          console.log(generatePage(directory));
         };
 
     });
 };
 
-managerPrompt().then(prompt);
-
+managerPrompt().then(prompt)
