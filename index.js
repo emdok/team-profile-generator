@@ -136,7 +136,6 @@ function managerPrompt() {
 
 function prompt() {
     return inquirer.prompt(promptOption).then((answers) => {
-        console.log(answers.option[0]);
 
         if (answers.option[0] === 'Engineer') {
             inquirer.prompt(employeeInput).then((answers) => {
