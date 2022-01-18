@@ -8,11 +8,11 @@ const generateCards = (teamData) => {
 
     for (let i = 0; i < teamData.length; i++) {
       if (teamData[i].role == 'Manager') {
-        thirdPop = teamData[i].officeNumber;
+        thirdPop = "Office Number: " + teamData[i].officeNumber;
       } else if (teamData[i].role == 'Engineer') {
-        thirdPop = teamData[i].github;
+        thirdPop = "Github: " + `<a href="https://github.com/${teamData[i].github}" target="_blank">${teamData[i].github}</a>`;
       } else {
-        thirdPop = teamData[i].school;
+        thirdPop = "School: " + teamData[i].school;
       }
 
       data += `<div class="col">
@@ -23,8 +23,8 @@ const generateCards = (teamData) => {
         </div>
         <div class="card-body">
           <ul class="list-group">
-            <li class="list-group-item">${teamData[i].id}</li>
-            <li class="list-group-item">${teamData[i].email}</li>
+            <li class="list-group-item">ID: ${teamData[i].id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${teamData[i].email}">${teamData[i].email}</a></li>
             <li class="list-group-item">${thirdPop}</li>
           </ul>
         </div>
