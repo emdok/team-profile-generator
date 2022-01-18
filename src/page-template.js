@@ -3,23 +3,33 @@ const generateCards = (teamData) => {
     return "";
   }
     console.log(teamData);
-
+    let data = '';
+    let thirdPop = '';
+    
     for (let i = 0; i < teamData.length; i++) {
-      return `<div class="col s12 m3">
+      if (teamData[i].role == 'Manager') {
+        thirdPop = teamData[i].officeNumber;
+      } else if (teamData[i].role == 'Engineer') {
+        thirdPop = teamData[i].github;
+      } else {
+        thirdPop = teamData[i].school;
+      }
+
+      data += `<div class="col s12 m3">
       <div class="card small blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">${[i].i.name}</span>
-          <span class="card-title">${i.role}</span>
+          <span class="card-title">${teamData[i].name}</span>
+          <span class="card-title">${teamData[i].role}</span>
           <ul>
-            <li>${i.id}</li>
-            <li>${i.email}</li>
-            <li>${i[3]}</li>
+            <li>${teamData[i].id}</li>
+            <li>${teamData[i].email}</li>
+            <li>${thirdPop}</li>
           </ul>
         </div>
       </div>
     </div>`;
     };
-
+    return data;
 };
 
 module.exports = (templateData) => {
