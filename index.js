@@ -12,16 +12,15 @@ const promptOption = [
     type: "checkbox",
     name: "option",
     message:
-      "Would you like to add an Engineer, Intern, or Finish building team? (Required)",
+      "Would you like to add an Engineer, Intern, or Finish building team? (Required - Please select one option)",
     choices: ["Engineer", "Intern", "Finish"],
-    validate: (optionInput) => {
-      if (optionInput) {
-        return true;
-      } else {
-        console.log("Please select an option");
-        return false;
+    validate(answer) {
+      if (answer.length < 1) {
+        return 'You must choose an option.';
       }
-    }
+
+      return true;
+    },
   },
 ];
 
