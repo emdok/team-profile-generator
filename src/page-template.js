@@ -8,16 +8,14 @@ const generateCards = (teamData) => {
   let displayRole = "";
 
   for (let i = 0; i < teamData.length; i++) {
-
     if (teamData[i].role == "Manager") {
       thirdListEl = "Office Number: " + teamData[i].officeNumber;
-      displayRole = `<i class="bi bi-briefcase"></i> ${teamData[i].role}`
-
+      displayRole = `<i class="bi bi-briefcase"></i> ${teamData[i].role}`;
     } else if (teamData[i].role == "Engineer") {
       thirdListEl =
         "Github: " +
         `<a href="https://github.com/${teamData[i].github}" target="_blank">${teamData[i].github}</a>`;
-        displayRole = `<i class="bi bi-kanban"></i> ${teamData[i].role}`;
+      displayRole = `<i class="bi bi-kanban"></i> ${teamData[i].role}`;
     } else {
       thirdListEl = "School: " + teamData[i].school;
       displayRole = `<i class="bi bi-person-badge"></i> ${teamData[i].role}`;
